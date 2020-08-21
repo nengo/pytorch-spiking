@@ -1,0 +1,8 @@
+/.idea
+/pytorch_spiking.egg-info
+*.pyc
+/tmp
+/docs/_build
+/docs/examples/*
+!/docs/examples/*.ipynb
+/secret
