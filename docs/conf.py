@@ -50,6 +50,14 @@ numpydoc_show_class_members = False
 # -- nbsphinx
 nbsphinx_timeout = -1
 
+# -- nengo_sphinx_theme.ext.autoautosummary
+autoautosummary_change_modules = {
+    "pytorch_spiking": [
+        "pytorch_spiking.modules.SpikingActivation",
+        "pytorch_spiking.modules.Lowpass",
+    ],
+}
+
 # -- sphinx
 nitpicky = True
 exclude_patterns = [
