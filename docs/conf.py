@@ -55,6 +55,14 @@ notfound_urls_prefix = "/pytorch-spiking/"
 # -- numpydoc config
 numpydoc_show_class_members = False
 
+# -- nengo_sphinx_theme.ext.autoautosummary
+autoautosummary_change_modules = {
+    "pytorch_spiking": [
+        "pytorch_spiking.modules.SpikingActivation",
+        "pytorch_spiking.modules.Lowpass",
+    ],
+}
+
 # -- nengo_sphinx_theme.ext.sourcelinks
 sourcelinks_module = "pytorch_spiking"
 sourcelinks_url = "https://github.com/nengo/pytorch-spiking"

@@ -41,6 +41,15 @@ jobs:
       NUMPY_VERSION="numpy==1.16.0"
       SCRIPT="test"
     python: 3.6
+  -
+    env:
+      GPU_NUM="0"
+      SCRIPT="remote-docs"
+    stage: advanced
+  -
+    env:
+      GPU_NUM="0"
+      SCRIPT="remote-examples"
   - stage: deploy
     if: branch =~ ^release-candidate-* OR tag =~ ^v[0-9]*
     env: SCRIPT="deploy"

@@ -40,6 +40,7 @@ docs_req = [
     "nengo-sphinx-theme>=1.2.1",
     "numpydoc>=0.6.0",
     "sphinx>=3.0.0",
+    "torchvision>=0.7.0",
 ]
 optional_req = []
 tests_req = [

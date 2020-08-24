@@ -28,33 +28,39 @@ docs_conf_py:
   doctest_setup:
     - import numpy as np
     - import torch
+  autoautosummary_change_modules:
+    pytorch_spiking:
+      - pytorch_spiking.modules.SpikingActivation
+      - pytorch_spiking.modules.Lowpass
 
 ci_scripts:
   - template: static
+    codespell_ignore_words:
+      - hist
   - template: test
     coverage: true
     pip_install:
       - $PYTORCH_VERSION
       - $NUMPY_VERSION
       - nengo
-#  - template: docs
-#    pip_install:
-#      - $PYTORCH_VERSION
-#      - $NUMPY_VERSION
-#  - template: examples
-#    pip_install:
-#      - $PYTORCH_VERSION
-#      - $NUMPY_VERSION
-#  - template: remote-script
-#    remote_script: docs
-#    output_name: remote-docs
-#    host: azure-docs
-#    travis_var_key: 2895d60e3414
-#  - template: remote-script
-#    remote_script: examples
-#    output_name: remote-examples
-#    host: azure-examples
-#    travis_var_key: 2895d60e3414
+  - template: docs
+    pip_install:
+      - $PYTORCH_VERSION
+      - $NUMPY_VERSION
+  - template: examples
+    pip_install:
+      - $PYTORCH_VERSION
+      - $NUMPY_VERSION
+  - template: remote-script
+    remote_script: docs
+    output_name: remote-docs
+    host: azure-docs
+    travis_var_key: 2895d60e3414
+  - template: remote-script
+    remote_script: examples
+    output_name: remote-examples
+    host: azure-examples
+    travis_var_key: 2895d60e3414
   - template: deploy
 
 travis_yml:
@@ -71,13 +77,13 @@ travis_yml:
         PYTORCH_VERSION: torch==1.0.0
         NUMPY_VERSION: numpy==1.16.0
       python: 3.6
-#    - stage: advanced
-#      script: remote-docs
-#      env:
-#        GPU_NUM: 0
-#    - script: remote-examples
-#      env:
-#        GPU_NUM: 0
+    - stage: advanced
+      script: remote-docs
+      env:
+        GPU_NUM: 0
+    - script: remote-examples
+      env:
+        GPU_NUM: 0
   pypi_user: drasmuss
   deploy_dists:
     - sdist
@@ -107,6 +113,7 @@ setup_py:
     - nengo-sphinx-theme>=1.2.1
     - numpydoc>=0.6.0
     - sphinx>=3.0.0
+    - torchvision>=0.7.0
   tests_req:
     - pylint>=1.9.2
     - pytest>=3.6.0
