@@ -44,8 +44,8 @@ class SpikingActivation(torch.nn.Module):  # pylint: disable=abstract-method
         If False, use the base activation function for the forward and
         backward pass during training.
     return_sequences : bool
-        Whether to return the last output in the output sequence (default), or the
-        full sequence.
+        Whether to return the full sequence of output spikes (default),
+        or just the spikes on the last timestep.
     """
 
     def __init__(
@@ -54,7 +54,7 @@ class SpikingActivation(torch.nn.Module):  # pylint: disable=abstract-method
         dt=0.001,
         initial_state=None,
         spiking_aware_training=True,
-        return_sequences=False,
+        return_sequences=True,
     ):
         """"""  # empty docstring removes useless parent docstring from docs
         super().__init__()
@@ -115,8 +115,8 @@ class Lowpass(torch.nn.Module):  # pylint: disable=abstract-method
     level_initializer : ``torch.Tensor``
         Initializer for filter state.
     return_sequences : bool
-        Whether to return the last output in the output sequence (default), or the
-        full sequence.
+        Whether to return the full sequence of filtered output (default),
+        or just the output on the last timestep.
     """
 
     def __init__(
@@ -126,7 +126,7 @@ class Lowpass(torch.nn.Module):  # pylint: disable=abstract-method
         dt=0.001,
         apply_during_training=True,
         initial_level=None,
-        return_sequences=False,
+        return_sequences=True,
     ):
         """"""  # empty docstring removes useless parent docstring from docs
         super().__init__()
@@ -190,3 +190,35 @@ class Lowpass(torch.nn.Module):  # pylint: disable=abstract-method
             return torch.stack(all_levels, dim=1)
         else:
             return level
+
+
+class TemporalAvgPool(torch.nn.Module):
+    """Module for taking the average across one dimension of a tensor.
+
+    Parameters
+    ----------
+    dim : int, optional
+        The dimension to average across. Defaults to the second dimension (``dim=1``),
+        which is typically the time dimension (for tensors that have a time dimension).
+    """
+
+    def __init__(self, dim=1):
+        """"""  # empty docstring removes useless parent docstring from docs
+        super().__init__()
+        self.dim = dim
+
+    def forward(self, inputs):
+        """Apply average pooling to inputs.
+
+        Parameters
+        ----------
+        inputs : ``torch.Tensor``
+            Array of input values with shape ``(batch_size, n_steps, ...)``.
+
+        Returns
+        -------
+        outputs : ``torch.Tensor``
+            Array of output values with shape ``(batch_size, ...)``.
+            The time dimension is fully averaged and removed.
+        """
+        return torch.mean(inputs, dim=self.dim)
