@@ -55,6 +55,7 @@ autoautosummary_change_modules = {
     "pytorch_spiking": [
         "pytorch_spiking.modules.SpikingActivation",
         "pytorch_spiking.modules.Lowpass",
+        "pytorch_spiking.modules.TemporalAvgPool",
     ],
 }
 

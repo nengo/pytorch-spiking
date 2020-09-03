@@ -86,8 +86,8 @@ def test_spiking_aware_training(rng, allclose):
         torch.nn.ReLU(), spiking_aware_training=True
     ).train()
     x = torch.from_numpy(rng.uniform(-1, 1, size=(10, 20, 32))).requires_grad_(True)
-    y = layer(x)
-    y_sat = layer_sat(x)
+    y = layer(x)[:, -1]
+    y_sat = layer_sat(x)[:, -1]
     y_ground = torch.nn.ReLU()(x)[:, -1]
 
     # forward pass is different
@@ -173,7 +173,7 @@ def test_lowpass_tau(dt, allclose, rng):
 
     y_nengo = nengo.Lowpass(0.1).filt(x, axis=1, dt=dt)
 
-    assert allclose(y, y_nengo[:, -1])
+    assert allclose(y, y_nengo)
 
 
 def test_lowpass_apply_during_training(allclose, rng):
@@ -256,3 +256,12 @@ def test_lowpass_trainable(allclose):
 def test_lowpass_validation():
     with pytest.raises(ValueError, match="tau must be a positive number"):
         modules.Lowpass(tau=0, units=1)
+
+
+def test_temporalavgpool(rng, allclose):
+    x = rng.randn(32, 10, 2, 5)
+    tx = torch.from_numpy(x)
+    for dim in range(x.ndim):
+        model = torch.nn.Sequential(modules.TemporalAvgPool(dim=dim))
+        toutput = model(tx)
+        assert allclose(toutput.numpy(), x.mean(axis=dim))
