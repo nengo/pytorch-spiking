@@ -1,3 +1,5 @@
+import copy
+
 import numpy as np
 import pytest
 import torch
@@ -265,3 +267,29 @@ def test_temporalavgpool(rng, allclose):
         model = torch.nn.Sequential(modules.TemporalAvgPool(dim=dim))
         toutput = model(tx)
         assert allclose(toutput.numpy(), x.mean(axis=dim))
+
+
+@pytest.mark.parametrize(
+    "module",
+    (
+        modules.SpikingActivation(
+            torch.nn.ReLU(), initial_state=torch.zeros((32, 50)), dt=1
+        ),
+        modules.Lowpass(tau=0.01, units=50, dt=0.001),
+    ),
+)
+def test_return_sequences(module, rng, allclose):
+    x = torch.tensor(rng.randn(32, 10, 50))
+
+    with torch.no_grad():
+        module_seq = copy.deepcopy(module)
+        module_seq.return_sequences = True
+        y_seq = module_seq(x)
+
+        module_last = copy.deepcopy(module)
+        module_last.return_sequences = False
+        y_last = module_last(x)
+
+    assert y_seq.shape == x.shape
+    assert y_last.shape == (x.shape[0], x.shape[2])
+    assert allclose(y_seq[:, -1], y_last)
