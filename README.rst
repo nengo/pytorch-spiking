@@ -1,3 +1,7 @@
+.. image:: https://img.shields.io/pypi/v/pytorch-spiking.svg
+  :target: https://pypi.org/project/pytorch-spiking
+  :alt: Latest PyPI version
+
 .. image:: https://img.shields.io/travis/com/nengo/pytorch-spiking/master.svg
   :target: https://travis-ci.com/nengo/pytorch-spiking
   :alt: Travis-CI build status
