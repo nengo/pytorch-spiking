@@ -43,7 +43,7 @@ ci_scripts:
     pip_install:
       - $PYTORCH_VERSION
       - $NUMPY_VERSION
-      - nengo
+      - nengo[tests]
   - template: docs
     pip_install:
       - $PYTORCH_VERSION
