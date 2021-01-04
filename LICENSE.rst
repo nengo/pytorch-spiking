@@ -4,7 +4,7 @@
 PyTorchSpiking license
 **********************
 
-Copyright (c) 2020-2020 Applied Brain Research
+Copyright (c) 2020-2021 Applied Brain Research
 
 PyTorchSpiking is made available under a proprietary license
 that permits using, copying, sharing, and making derivative works from

@@ -86,7 +86,7 @@ user_agent = "pytorch_spiking"
 
 project = "PyTorchSpiking"
 authors = "Applied Brain Research"
-copyright = "2020-2020 Applied Brain Research"
+copyright = "2020-2021 Applied Brain Research"
 version = ".".join(pytorch_spiking.__version__.split(".")[:2])  # Short X.Y version
 release = pytorch_spiking.__version__  # Full version, with tags
 
