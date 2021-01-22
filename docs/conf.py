@@ -102,5 +102,5 @@ html_favicon = str(pathlib.Path("_static", "favicon.ico"))
 html_theme_options = {
     "nengo_logo": "",
     "nengo_logo_color": "#a8acaf",
-    "analytics_id": "UA-41658423-2",
+    "tagmanager_id": "GTM-KWCR2HN",
 }

@@ -6,3 +6,4 @@
 /docs/examples/*
 !/docs/examples/*.ipynb
 /secret
+/.ci/*.sh

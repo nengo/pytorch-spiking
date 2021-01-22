@@ -17,14 +17,19 @@ setup_cfg:
   pytest:
     xfail_strict: True
   pylint:
+    disable:
+      - not-callable # https://github.com/pytorch/pytorch/issues/24807
     known_third_party:
       - torch
+  codespell:
+    ignore_words:
+      - hist
 
 docs_conf_py:
   nengo_logo: ""
   extensions:
     - nengo_sphinx_theme.ext.autoautosummary
-  analytics_id: UA-41658423-2
+  tagmanager_id: GTM-KWCR2HN
   doctest_setup:
     - import numpy as np
     - import torch
@@ -36,8 +41,6 @@ docs_conf_py:
 
 ci_scripts:
   - template: static
-    codespell_ignore_words:
-      - hist
   - template: test
     coverage: true
     pip_install:
