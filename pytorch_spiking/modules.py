@@ -7,7 +7,8 @@ from pytorch_spiking.functional import spiking_activation
 
 
 class SpikingActivation(torch.nn.Module):  # pylint: disable=abstract-method
-    """Module for converting an arbitrary activation function to a spiking equivalent.
+    """
+    Module for converting an arbitrary activation function to a spiking equivalent.
 
     Neurons will spike at a rate proportional to the output of the base activation
     function. For example, if the activation function is outputting a value of 10, then
@@ -66,7 +67,8 @@ class SpikingActivation(torch.nn.Module):  # pylint: disable=abstract-method
         self.return_sequences = return_sequences
 
     def forward(self, inputs):
-        """Compute output spikes given inputs.
+        """
+        Compute output spikes given inputs.
 
         Parameters
         ----------
@@ -93,7 +95,8 @@ class SpikingActivation(torch.nn.Module):  # pylint: disable=abstract-method
 
 
 class Lowpass(torch.nn.Module):  # pylint: disable=abstract-method
-    """Module implementing a Lowpass filter.
+    """
+    Module implementing a Lowpass filter.
 
     The initial filter state and filter time constants are both trainable
     parameters. However, if ``apply_during_training=False`` then the parameters are
@@ -157,7 +160,8 @@ class Lowpass(torch.nn.Module):  # pylint: disable=abstract-method
         )
 
     def forward(self, inputs):
-        """Apply filter to inputs.
+        """
+        Apply filter to inputs.
 
         Parameters
         ----------
@@ -193,7 +197,8 @@ class Lowpass(torch.nn.Module):  # pylint: disable=abstract-method
 
 
 class TemporalAvgPool(torch.nn.Module):
-    """Module for taking the average across one dimension of a tensor.
+    """
+    Module for taking the average across one dimension of a tensor.
 
     Parameters
     ----------
@@ -208,7 +213,8 @@ class TemporalAvgPool(torch.nn.Module):
         self.dim = dim
 
     def forward(self, inputs):
-        """Apply average pooling to inputs.
+        """
+        Apply average pooling to inputs.
 
         Parameters
         ----------
