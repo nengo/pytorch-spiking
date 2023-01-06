@@ -1,9 +1,11 @@
-/.idea
-/pytorch_spiking.egg-info
 *.pyc
-/tmp
+/.idea
 /docs/_build
 /docs/examples/*
-!/docs/examples/*.ipynb
+/pytorch_spiking.egg-info
 /secret
-/.ci/*.sh
+/tmp
+bones-scripts/
+
+# Exceptions, must be last
+!/docs/examples/*.ipynb

@@ -5,6 +5,7 @@ repo_name: nengo/pytorch-spiking
 description: Spiking neuron integration for PyTorch
 copyright_start: 2020
 license: abr-free
+main_branch: main
 
 license_rst: {}
 
@@ -30,7 +31,6 @@ docs_conf_py:
   nengo_logo: ""
   extensions:
     - nengo_sphinx_theme.ext.autoautosummary
-  tagmanager_id: GTM-KWCR2HN
   doctest_setup:
     - import numpy as np
     - import torch
@@ -46,65 +46,35 @@ ci_scripts:
     coverage: true
     pip_install:
       - $PYTORCH_VERSION
-      - $NUMPY_VERSION
       - nengo[tests]
   - template: docs
     pip_install:
       - $PYTORCH_VERSION
-      - $NUMPY_VERSION
   - template: examples
     pip_install:
       - $PYTORCH_VERSION
-      - $NUMPY_VERSION
   - template: remote-script
     remote_script: docs
     output_name: remote-docs
     host: azure-docs
-    travis_var_key: 2895d60e3414
+    azure_name: nengo-dl-docs
+    azure_group: nengo-ci
+    remote_vars:
+      PYTORCH_VERSION: $PYTORCH_VERSION
+    remote_setup:
+      - micromamba install -y cudatoolkit=10.2
   - template: remote-script
     remote_script: examples
     output_name: remote-examples
     host: azure-examples
-    travis_var_key: 2895d60e3414
+    azure_name: nengo-dl-examples
+    azure_group: nengo-ci
+    remote_vars:
+      PYTORCH_VERSION: $PYTORCH_VERSION
+    remote_setup:
+      - micromamba install -y cudatoolkit=10.2
   - template: deploy
-
-travis_yml:
-  python: 3.8
-  global_vars:
-    NUMPY_VERSION: numpy>=1.16.0
-    PYTORCH_VERSION: torch>=1.0.0
-  jobs:
-    - stage: basic
-      script: static
-    - script: test
-    - script: test
-      env:
-        PYTORCH_VERSION: torch==1.0.0
-        NUMPY_VERSION: numpy==1.16.0
-      python: 3.6
-    - stage: advanced
-      script: remote-docs
-      env:
-        GPU_NUM: 0
-    - script: remote-examples
-      env:
-        GPU_NUM: 0
-  pypi_user: __token__
-  deploy_dists:
-    - sdist
-    - bdist_wheel
-  slack_notifications: "m+yuPdTXYDo0pvPVp2LE2GE50llIpiroyHf/li3SNAnW3K2z3kUbIx0jCINr\
-    7okCKpNKBKIifCc25NDUGBeJ+r1Ar7XR/PFCs4J2Kaksl95ei+ORpXxxScrBoi7AxM6dQchPuc62mxiD\
-    c8E+gSS0WSP0tKjZTn1IypZOR6nDj7qqsQFU1r59rMpYY/Crk2QyylcqXgxgKHtIivqZkYNdwCSCobhQ\
-    SrAINeUPXL5kbe8NzhgFB32vNC3UQoikNhNiYpLb3uApPCQeaQ0uVJbCiFktJVH7v2SVHd/BzTfmwE2G\
-    xRFVwHZP39wxlm+Qvx9+2Nr1lfwEAgSzMe10zCo7/3nlhLPfLGHfGKJbMTAJGgsY49A0vJ4v6O2BbUyH\
-    T+y2WlCS1/B8q2b07nYq+5AJP0eZknU2c/QtuP/a2Hlv00Hasi5xyS0Jd9AjPVIjXHQArjISoGnFkRxG\
-    ZbaecDQURkpugZfUZT6IVuwIwven4HSugoJ7SzbSieTF4mYCLxptaOaZq4GIoD+ICEAZeiwFm1NPxnJd\
-    mOFY+JD3Qh3oAglVDDSp2hqRFMi+cgdxOr+UgKwB20W53EsYRpQiOqx3zZ/K9vP7jCpe6rXti5AtWpOU\
-    LgIil9+0FCxD7gKP/KrkSN1g+OEhdNgXKzqPJS1RE4VGyu9RqvpbSaj1gk/zp/8="
-
-codecov_yml:
-  abs_target: 100%
+    wheel: true
 
 setup_py:
   include_package_data: True
@@ -127,16 +97,16 @@ setup_py:
     - pytest-rng>=1.0.0
     - pytest-xdist>=1.16.0
   classifiers:
-      - "Development Status :: 3 - Alpha"
-      - "Intended Audience :: Science/Research"
-      - "Operating System :: Microsoft :: Windows"
-      - "Operating System :: POSIX :: Linux"
-      - "Programming Language :: Python"
-      - "Programming Language :: Python :: 3.6"
-      - "Programming Language :: Python :: 3.7"
-      - "Programming Language :: Python :: 3.8"
-      - "Topic :: Scientific/Engineering"
-      - "Topic :: Scientific/Engineering :: Artificial Intelligence"
+    - "Development Status :: 3 - Alpha"
+    - "Intended Audience :: Science/Research"
+    - "Operating System :: Microsoft :: Windows"
+    - "Operating System :: POSIX :: Linux"
+    - "Programming Language :: Python"
+    - "Programming Language :: Python :: 3.6"
+    - "Programming Language :: Python :: 3.7"
+    - "Programming Language :: Python :: 3.8"
+    - "Topic :: Scientific/Engineering"
+    - "Topic :: Scientific/Engineering :: Artificial Intelligence"
 
 pyproject_toml: {}
 

@@ -6,10 +6,6 @@
   :target: https://pypi.org/project/pytorch-spiking
   :alt: Python versions
 
-.. image:: https://img.shields.io/codecov/c/github/nengo/pytorch-spiking/master.svg
-  :target: https://codecov.io/gh/nengo/pytorch-spiking
-  :alt: Test coverage
-
 **************
 PyTorchSpiking
 **************

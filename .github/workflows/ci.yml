@@ -1,0 +1,113 @@
+name: CI testing
+on:
+  pull_request: {}
+  push:
+    branches:
+      - main
+      - release-candidate-*
+    tags:
+      - v*
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        description: Run the build with SSH debugging enabled
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: nengo/nengo-bones/actions/setup@main
+      - uses: nengo/nengo-bones/actions/generate-and-check@main
+      - uses: nengo/nengo-bones/actions/run-script@main
+        with:
+          name: static
+  test:
+    needs:
+      - static
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - script: test
+            coverage-name: basic
+          - script: test
+            coverage-name: oldest
+            pytorch-version: torch==1.0.0
+            python: "3.7"
+      fail-fast: false
+    env:
+      PYTORCH_VERSION: ${{ matrix.pytorch-version || 'torch' }}
+    steps:
+      - uses: nengo/nengo-bones/actions/setup@main
+        with:
+          python-version: ${{ matrix.python || '3.9' }}
+      - uses: nengo/nengo-bones/actions/generate-and-check@main
+      - uses: nengo/nengo-bones/actions/run-script@main
+        with:
+          name: ${{ matrix.script }}
+      - uses: actions/upload-artifact@v3
+        if: ${{ always() && matrix.coverage-name }}
+        with:
+          name: coverage-${{ matrix.coverage-name }}
+          path: .coverage
+  remote:
+    needs:
+      - test
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - script: remote-docs
+          - script: remote-examples
+      fail-fast: false
+    env:
+      PYTORCH_VERSION: torch>=1.0.0
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      SSH_CONFIG: ${{ secrets.SSH_CONFIG }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - uses: nengo/nengo-bones/actions/setup@main
+        with:
+          python-version: "3.8"
+      - name: Write secrets to file
+        run: |
+          mkdir -p ~/.ssh
+          echo '${{ secrets.AZURE_PEM }}' > ~/.ssh/azure.pem
+      - uses: nengo/nengo-bones/actions/generate-and-check@main
+      - uses: nengo/nengo-bones/actions/run-script@main
+        with:
+          name: ${{ matrix.script }}
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - test
+    if: ${{ always() }}
+    steps:
+      - uses: nengo/nengo-bones/actions/coverage-report@main
+  deploy:
+    needs:
+      - remote
+    if: >-
+      startsWith(github.ref_name, 'release-candidate-') ||
+      (github.ref_type == 'tag' && startsWith(github.ref_name, 'v'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Write .pypirc to file
+        run: |
+          echo '${{ secrets.PYPIRC_FILE }}' > ~/.pypirc
+      - uses: actions/checkout@v3
+      - uses: nengo/nengo-bones/actions/setup@main
+        with:
+          python-version: "3.10"
+      - uses: nengo/nengo-bones/actions/generate-and-check@main
+      - uses: nengo/nengo-bones/actions/run-script@main
+        with:
+          name: deploy
