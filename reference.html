@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API reference &#8212; PyTorchSpiking 0.1.1.dev0 docs</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,600|Rajdhani:700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.nengo.ai/css/bootstrap.css" type="text/css">
+<style>
+ body .title-bar,
+ body .documentation-source h1:after {
+   background-color: #a8acaf;
+ }
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<!-- From basic/layout.html -->
+<script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+
+
+<script src="_static/underscore.js"></script>
+
+
+<script src="_static/doctools.js"></script>
+
+
+<script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GT8XEDLTMJ"></script>
+        <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', 'G-GT8XEDLTMJ');
+        </script>
+        <!-- End Google tag (gtag.js) -->
+        <!-- Matomo -->
+        <script>
+         var _paq = window._paq = window._paq || [];
+         _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+         _paq.push(["setCookieDomain", "*.appliedbrainresearch.com"]);
+         _paq.push(["setDomains", ["*.appliedbrainresearch.com","*.edge.nengo.ai","*.forum.nengo.ai","*.labs.nengo.ai","*.nengo.ai"]]);
+         _paq.push(["enableCrossDomainLinking"]);
+         _paq.push(["setDoNotTrack", true]);
+         _paq.push(['trackPageView']);
+         _paq.push(['enableLinkTracking']);
+         (function() {
+           var u="https://appliedbrainresearch.matomo.cloud/";
+           _paq.push(['setTrackerUrl', u+'matomo.php']);
+           _paq.push(['setSiteId', '3']);
+           var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+           g.async=true; g.src='//cdn.matomo.cloud/appliedbrainresearch.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+         })();
+        </script>
+        <!-- End Matomo Code -->
+    
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Project information" href="project.html" />
+    <link rel="prev" title="Classifying Fashion MNIST with spiking activations" href="examples/spiking-fashion-mnist.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  </head><body class="bg-dark">
+
+<header class="fixed-top header-top shadow-sm">
+  <nav class="navbar navbar-expand-md navbar-light bg-white">
+    <a class="navbar-brand" href="https://www.nengo.ai/">
+      <img
+        src="https://www.nengo.ai/design/_images/general-full-light.svg"
+        alt="Nengo"
+        class="logo"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar-collapse"
+      aria-controls="navbar-collapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.nengo.ai/">What is Nengo?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.nengo.ai/examples/">Examples</a>
+        </li>
+        <li class="nav-item dropdown active">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbar-dropdown-docs"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            href="#"
+            >Documentation</a
+          >
+          <div
+            class="dropdown-menu shadow-lg border-0"
+            aria-labelledby="navbar-dropdown-docs"
+          >
+            
+            <a class="dropdown-item" href="https://www.nengo.ai/nengo/">Nengo core</a>
+            <a class="dropdown-item" href="https://github.com/nengo/nengo-gui/">NengoGUI</a>
+            <a class="dropdown-item" href="https://www.nengo.ai/nengo-dl/">NengoDL</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://www.nengo.ai/nengo-spa/">NengoSPA</a>
+            <a class="dropdown-item" href="https://www.nengo.ai/nengo-extras/">NengoExtras</a>
+            <a class="dropdown-item" href="https://arvoelke.github.io/nengolib-docs/">Nengolib</a>
+            <a class="dropdown-item" href="https://www.nengo.ai/keras-spiking">KerasSpiking</a>
+            <a class="dropdown-item" href="https://www.nengo.ai/pytorch-spiking">PyTorchSpiking</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://www.nengo.ai/nengo-fpga/">NengoFPGA</a>
+            <a class="dropdown-item" href="https://www.nengo.ai/nengo-loihi/">NengoLoihi</a>
+            <a class="dropdown-item" href="https://labs.nengo.ai/nengo-ocl/">NengoOCL</a>
+            <a class="dropdown-item" href="https://github.com/project-rig/nengo_spinnaker">NengoSpiNNaker</a>
+            <a class="dropdown-item" href="https://github.com/nengo-labs/nengo-mpi">NengoMPI</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://www.nengo.ai/documentation/"
+              >All documentation</a
+            >
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbar-dropdown-community"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            href="#"
+            >Community</a
+          >
+          <div
+            class="dropdown-menu shadow-lg border-0"
+            aria-labelledby="navbar-dropdown-community"
+          >
+            <a class="dropdown-item" href="https://forum.nengo.ai">Forum</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://www.nengo.ai/people/"
+              >People</a
+            >
+            <a class="dropdown-item" href="https://www.nengo.ai/summer-school/"
+              >Summer school</a
+            >
+            <a class="dropdown-item" href="https://www.nengo.ai/contributing/"
+              >Contributing</a
+            >
+            <a class="dropdown-item" href="https://www.nengo.ai/publications/"
+              >Publications</a
+            >
+            <a class="dropdown-item" href="https://www.nengo.ai/videos/"
+              >Videos</a
+            >
+            <a class="dropdown-item" href="https://www.nengo.ai/conduct/"
+              >Code of conduct</a
+            >
+            <a class="dropdown-item" href="https://www.nengo.ai/caa/">CAA</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link btn btn-success btn-sm text-white"
+            href="https://www.nengo.ai/getting-started/"
+            >Getting started</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="main-content gradient-top">
+  <div class="container-fluid">
+    <div class="row"><a class="toggle-sidenav d-block d-md-none" href="#"
+  ><i class="icon-close fa fa-fw fa-arrow-left"></i
+  ><i class="icon-open fa fa-fw fa-arrow-right"></i
+></a>
+<div role="complementary" class="sidenav col-4 col-xl-3 p-0 border-right">
+  <h3 class="pt-5 px-5">
+    <a href="index.html">
+      PyTorchSpiking
+    </a>
+  </h3>
+<form class="px-5 py-3 my-0 border-bottom" action="search.html" method="get">
+  <div class="form-group form-group-single">
+    <input type="text" name="q" class="form-control" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <button type="submit" class="btn btn-link">
+      <img src="https://www.nengo.ai/img/icon-search.svg" alt="Go" />
+    </button>
+  </div>
+</form><div class="p-5 toctree">
+  
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-pytorch_spiking.modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pytorch_spiking.functional">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project.html">Project information</a></li>
+</ul>
+
+  
+  </div>
+  
+</div>
+      
+
+      <div class="col-12 col-md-8 col-xl-9">
+        <div class="container">
+          <div class="row">
+            <div class="col-10 offset-1 pb-5 documentation-source" role="main">
+              
+              
+  <div class="section" id="api-reference">
+<h1>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-pytorch_spiking.modules">
+<span id="modules"></span><h2>Modules<a class="headerlink" href="#module-pytorch_spiking.modules" title="Permalink to this headline">¶</a></h2>
+<p>Modules for adding spiking behaviour to PyTorch models.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytorch_spiking.SpikingActivation" title="pytorch_spiking.SpikingActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_spiking.SpikingActivation</span></code></a></p></td>
+<td><p>Module for converting an arbitrary activation function to a spiking equivalent.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytorch_spiking.Lowpass" title="pytorch_spiking.Lowpass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_spiking.Lowpass</span></code></a></p></td>
+<td><p>Module implementing a Lowpass filter.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytorch_spiking.TemporalAvgPool" title="pytorch_spiking.TemporalAvgPool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_spiking.TemporalAvgPool</span></code></a></p></td>
+<td><p>Module for taking the average across one dimension of a tensor.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="pytorch_spiking.SpikingActivation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pytorch_spiking.</span></code><code class="sig-name descname"><span class="pre">SpikingActivation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spiking_aware_training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_sequences</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/modules.py#L9-L94"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.SpikingActivation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Module for converting an arbitrary activation function to a spiking equivalent.</p>
+<p>Neurons will spike at a rate proportional to the output of the base activation
+function. For example, if the activation function is outputting a value of 10, then
+the wrapped SpikingActivationCell will output spikes at a rate of 10Hz (i.e., 10
+spikes per 1 simulated second, where 1 simulated second is equivalent to <code class="docutils literal notranslate"><span class="pre">1/dt</span></code>
+time steps). Each spike will have height <code class="docutils literal notranslate"><span class="pre">1/dt</span></code> (so that the integral of the
+spiking output will be the same as the integral of the base activation output).
+Note that if the base activation is outputting a negative value then the spikes
+will have height <code class="docutils literal notranslate"><span class="pre">-1/dt</span></code>. Multiple spikes per timestep are also possible, in
+which case the output will be <code class="docutils literal notranslate"><span class="pre">n/dt</span></code> (where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of spikes).</p>
+<p>When applying this layer to an input, make sure that the input has a time axis.
+The spiking output will be computed along the time axis.
+The number of simulation timesteps will depend on the length of that time axis.
+The number of timesteps does not need to be the same during
+training/evaluation/inference. In particular, it may be more efficient
+to use one timestep during training and multiple timesteps during inference
+(often with <code class="docutils literal notranslate"><span class="pre">spiking_aware_training=False</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply_during_training=False</span></code>
+on any <a class="reference internal" href="#pytorch_spiking.Lowpass" title="pytorch_spiking.Lowpass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Lowpass</span></code></a> layers).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>activation</strong><span class="classifier">callable</span></dt><dd><p>Activation function to be converted to spiking equivalent.</p>
+</dd>
+<dt><strong>dt</strong><span class="classifier">float</span></dt><dd><p>Length of time (in seconds) represented by one time step.</p>
+</dd>
+<dt><strong>initial_state</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Initial spiking voltage state (should be an array with shape
+<code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_neurons)</span></code>, with values between 0 and 1). Will use a uniform
+distribution if none is specified.</p>
+</dd>
+<dt><strong>spiking_aware_training</strong><span class="classifier">bool</span></dt><dd><p>If True (default), use the spiking activation function
+for the forward pass and the base activation function for the backward pass.
+If False, use the base activation function for the forward and
+backward pass during training.</p>
+</dd>
+<dt><strong>return_sequences</strong><span class="classifier">bool</span></dt><dd><p>Whether to return the full sequence of output spikes (default),
+or just the spikes on the last timestep.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pytorch_spiking.SpikingActivation.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/modules.py#L69-L94"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.SpikingActivation.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute output spikes given inputs.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>inputs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Array of input values with shape <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_steps,</span> <span class="pre">n_neurons)</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>outputs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Array of output spikes with shape <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_neurons)</span></code> if
+<code class="docutils literal notranslate"><span class="pre">return_sequences=False</span></code> else <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_steps,</span> <span class="pre">n_neurons)</span></code>. Each
+element will have value <code class="docutils literal notranslate"><span class="pre">n/dt</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of spikes
+emitted by that neuron on that time step.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pytorch_spiking.Lowpass">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pytorch_spiking.</span></code><code class="sig-name descname"><span class="pre">Lowpass</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_during_training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_sequences</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/modules.py#L97-L196"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.Lowpass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Module implementing a Lowpass filter.</p>
+<p>The initial filter state and filter time constants are both trainable
+parameters. However, if <code class="docutils literal notranslate"><span class="pre">apply_during_training=False</span></code> then the parameters are
+not part of the training loop, and so will never be updated.</p>
+<p>When applying this layer to an input, make sure that the input has a time axis.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>tau</strong><span class="classifier">float</span></dt><dd><p>Time constant of filter (in seconds).</p>
+</dd>
+<dt><strong>dt</strong><span class="classifier">float</span></dt><dd><p>Length of time (in seconds) represented by one time step.</p>
+</dd>
+<dt><strong>apply_during_training</strong><span class="classifier">bool</span></dt><dd><p>If False, this layer will effectively be ignored during training (this
+often makes sense in concert with the swappable training behaviour in, e.g.,
+<a class="reference internal" href="#pytorch_spiking.SpikingActivation" title="pytorch_spiking.SpikingActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpikingActivation</span></code></a>, since if the activations are not spiking during training
+then we often don’t need to filter them either).</p>
+</dd>
+<dt><strong>level_initializer</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Initializer for filter state.</p>
+</dd>
+<dt><strong>return_sequences</strong><span class="classifier">bool</span></dt><dd><p>Whether to return the full sequence of filtered output (default),
+or just the output on the last timestep.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pytorch_spiking.Lowpass.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/modules.py#L162-L196"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.Lowpass.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply filter to inputs.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>inputs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Array of input values with shape <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_steps,</span> <span class="pre">units)</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>outputs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Array of output spikes with shape <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">units)</span></code> if
+<code class="docutils literal notranslate"><span class="pre">return_sequences=False</span></code> else <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_steps,</span> <span class="pre">units)</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pytorch_spiking.TemporalAvgPool">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pytorch_spiking.</span></code><code class="sig-name descname"><span class="pre">TemporalAvgPool</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/modules.py#L199-L230"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.TemporalAvgPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Module for taking the average across one dimension of a tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dim</strong><span class="classifier">int, optional</span></dt><dd><p>The dimension to average across. Defaults to the second dimension (<code class="docutils literal notranslate"><span class="pre">dim=1</span></code>),
+which is typically the time dimension (for tensors that have a time dimension).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pytorch_spiking.TemporalAvgPool.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/modules.py#L215-L230"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.TemporalAvgPool.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply average pooling to inputs.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>inputs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Array of input values with shape <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_steps,</span> <span class="pre">...)</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>outputs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Array of output values with shape <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">...)</span></code>.
+The time dimension is fully averaged and removed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pytorch_spiking.functional">
+<span id="functions"></span><h2>Functions<a class="headerlink" href="#module-pytorch_spiking.functional" title="Permalink to this headline">¶</a></h2>
+<p>Functional implementation of spiking layers.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytorch_spiking.functional.SpikingActivation" title="pytorch_spiking.functional.SpikingActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_spiking.functional.SpikingActivation</span></code></a></p></td>
+<td><p>Function for converting an arbitrary activation function to a spiking equivalent.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="pytorch_spiking.functional.SpikingActivation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pytorch_spiking.functional.</span></code><code class="sig-name descname"><span class="pre">SpikingActivation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/functional.py#L6-L105"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.functional.SpikingActivation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for converting an arbitrary activation function to a spiking equivalent.</p>
+<p class="rubric">Notes</p>
+<p>We would not recommend calling this directly, use
+<a class="reference internal" href="#pytorch_spiking.SpikingActivation" title="pytorch_spiking.SpikingActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_spiking.SpikingActivation</span></code></a> instead.</p>
+<dl class="py method">
+<dt id="pytorch_spiking.functional.SpikingActivation.forward">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spiking_aware_training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_sequences</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/functional.py#L16-L88"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.functional.SpikingActivation.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward pass of SpikingActivation function.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>inputs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Array of input values with shape <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_steps,</span> <span class="pre">n_neurons)</span></code>.</p>
+</dd>
+<dt><strong>activation</strong><span class="classifier">callable</span></dt><dd><p>Activation function to be converted to spiking equivalent.</p>
+</dd>
+<dt><strong>dt</strong><span class="classifier">float</span></dt><dd><p>Length of time (in seconds) represented by one time step.</p>
+</dd>
+<dt><strong>initial_state</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Initial spiking voltage state (should be an array with shape
+<code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">n_neurons)</span></code>, with values between 0 and 1). Will use a
+uniform distribution if none is specified.</p>
+</dd>
+<dt><strong>spiking_aware_training</strong><span class="classifier">bool</span></dt><dd><p>If True (default), use the spiking activation function
+for the forward pass and the base activation function for the backward pass.
+If False, use the base activation function for the forward and
+backward pass during training.</p>
+</dd>
+<dt><strong>return_sequences</strong><span class="classifier">bool</span></dt><dd><p>Whether to return the last output in the output sequence (default), or the
+full sequence.</p>
+</dd>
+<dt><strong>training</strong><span class="classifier">bool</span></dt><dd><p>Whether this function should be executed in training or evaluation mode
+(this only matters if <code class="docutils literal notranslate"><span class="pre">spiking_aware_training=False</span></code>).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pytorch_spiking.functional.SpikingActivation.backward">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">backward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad_output</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/nengo/pytorch-spiking/blob/master/pytorch_spiking/functional.py#L90-L105"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytorch_spiking.functional.SpikingActivation.backward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backward pass of SpikingActivation function.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><footer class="text-light footer-main gradient-bottom">
+  <p class="small text-center mb-0">
+    <a class="no-hover-line" href="https://appliedbrainresearch.com">
+      <img
+        src="https://appliedbrainresearch.com/img/logo-blue-notext.svg"
+        height="48"
+      />
+    </a>
+    <a href="https://www.nengo.ai/">What is Nengo?</a>
+    <a href="https://www.nengo.ai/examples/">Examples</a>
+    <a href="https://www.nengo.ai/documentation/">Documentation</a>
+    <a href="https://www.nengo.ai/getting-started/">Getting started</a>
+    <a href="https://www.nengo.ai/privacy/">Privacy</a>
+  </p>
+  <p class="small text-center mb-0">&copy; Applied Brain Research</p>
+</footer>
+<script>
+  var elements = document.querySelectorAll('.sidenav');
+  Stickyfill.add(elements);
+</script>
+<script>
+  ScrollReveal().reveal(".fade-in", {
+      scale: 0.85,
+      duration: 1000,
+      delay: 250,
+      interval: 50
+  });
+</script>
+<script>
+  $('a.toggle-sidenav').on('click', function(e) {
+    e.preventDefault();
+    if ( $(this).hasClass('active') ) {
+      $(this).removeClass('active');
+      $('.sidenav').removeClass('open');
+    } else {
+      $(this).addClass('active');
+      $('.sidenav').addClass('open');
+    }
+  });
+</script>
+<script>
+  var lists = document.querySelectorAll('.toctree ul');
+  lists.forEach((ul) => {
+      ul.classList.add("nav");
+  });
+  var links = document.querySelectorAll('.toctree a');
+  links.forEach((link) => {
+      link.classList.add("nav-link");
+  });
+  $("body").scrollspy({target: ".sidenav"});
+</script>
+  </body>
+</html>
