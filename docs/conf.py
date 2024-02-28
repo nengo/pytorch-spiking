@@ -16,7 +16,6 @@ extensions = [
     "sphinx.ext.todo",
     "nbsphinx",
     "nengo_sphinx_theme",
-    "nengo_sphinx_theme.ext.backoff",
     "nengo_sphinx_theme.ext.sourcelinks",
     "notfound.extension",
     "numpydoc",
@@ -86,7 +85,7 @@ user_agent = "pytorch_spiking"
 
 project = "PyTorchSpiking"
 authors = "Applied Brain Research"
-copyright = "2020-2023 Applied Brain Research"
+copyright = "2020-2024 Applied Brain Research"
 version = ".".join(pytorch_spiking.__version__.split(".")[:2])  # Short X.Y version
 release = pytorch_spiking.__version__  # Full version, with tags
 
@@ -117,7 +116,7 @@ html_theme_options = {
          var _paq = window._paq = window._paq || [];
          _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
          _paq.push(["setCookieDomain", "*.appliedbrainresearch.com"]);
-         _paq.push(["setDomains", ["*.appliedbrainresearch.com","*.edge.nengo.ai","*.forum.nengo.ai","*.labs.nengo.ai","*.nengo.ai"]]);
+         _paq.push(["setDomains", ["*.appliedbrainresearch.com","*.edge.nengo.ai","*.forum.nengo.ai","*.nengo.ai"]]);
          _paq.push(["enableCrossDomainLinking"]);
          _paq.push(["setDoNotTrack", true]);
          _paq.push(['trackPageView']);
